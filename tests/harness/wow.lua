@@ -201,6 +201,19 @@ function H.Reset()
     _G.C_Container = nil
     _G.C_Item = nil
 
+    -- WoW Forever: profession indexes, then name ... skill line (7th value).
+    H.professions = {}   -- { { name, line } } in GetProfessions order
+    _G.GetProfessions = function()
+        local indexes = {}
+        for i = 1, #H.professions do indexes[i] = i end
+        return unpack(indexes)
+    end
+    _G.GetProfessionInfo = function(index)
+        local p = H.professions[index]
+        if not p then return nil end
+        return p.name, "icon", 1, 75, 2, 0, p.line
+    end
+    _G.C_SkillInfo = nil
     _G.GetNumSkillLines = function() return #H.skills end
     _G.GetSkillLineInfo = function(i)
         local s = H.skills[i]

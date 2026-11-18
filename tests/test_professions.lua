@@ -33,8 +33,41 @@ H.Fire("SKILL_LINES_CHANGED")
 H.Check(P.known.tailoring and P.known.mining, "German and French names recognised")
 H.Check(P.own[2770], "a miner keeps Copper Ore")
 
+-- WoW Forever: GetProfessions / GetProfessionInfo with Forever's own skill
+-- lines (seen on 2026-11-18: the classic skill list found nothing there).
+ns = H.Boot(function()
+    H.skills = {}
+    H.professions = { { name = "Blacksmithing", line = 2938 }, { name = "Mining", line = 2946 },
+        { name = "Cooking", line = 2939 } }
+end)
+P = ns.Professions
+H.Equal(P.Describe(), "Blacksmithing, Mining, Cooking", "Forever professions read by skill line")
+H.Check(P.own[2770] and P.own[2840], "a smith and miner keeps Copper Ore and Copper Bar")
+H.professions = { { name = "Schmiedekunst", line = 999999 } }
+H.Fire("SKILL_LINES_CHANGED")
+H.Equal(P.Describe(), "Blacksmithing", "unknown line: the name decides")
+-- Empty right after login: the saved professions stay.
+H.professions = {}
+H.Fire("SPELLS_CHANGED")
+H.Equal(P.Describe(), "Blacksmithing", "empty list keeps what was seen")
+-- C_SkillInfo tables when GetProfessions is missing.
+ns = H.Boot(function()
+    _G.GetProfessions = nil
+    _G.GetNumSkillLines, _G.GetSkillLineInfo = nil, nil
+    _G.C_SkillInfo = {
+        GetNumSkillLines = function() return 2 end,
+        GetSkillLineInfo = function(i)
+            return ({ { skillName = "Professions", isHeader = true }, { skillName = "Tailoring", skillID = 197 } })[i]
+        end,
+    }
+end)
+H.Equal(ns.Professions.Describe(), "Tailoring", "C_SkillInfo skill list")
+P = ns.Professions
+
 -- Generated data sanity.
 local M = ns.Materials
+H.Equal(M.LINES[164], "blacksmithing", "classic skill line")
+H.Equal(M.LINES[2948], "tailoring", "Forever's second line")
 H.Check(type(M.BUILD) == "string" and M.BUILD:match("^1%.60%.1%.%d+$"), "data built from a Forever 1.60.1 build")
 for _, key in ipairs({ "alchemy", "blacksmithing", "cooking", "enchanting", "engineering", "firstaid",
     "leatherworking", "mining", "tailoring" }) do

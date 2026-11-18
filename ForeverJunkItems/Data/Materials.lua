@@ -21,6 +21,34 @@ M.NAMES = {
     tailoring = { "Alfaiataria", "Costura", "Couture", "Sastrería", "Schneiderei", "Tailoring", "Портняжное дело", "裁縫", "裁缝", "재봉술" },
 }
 
+-- Skill line -> profession (Forever adds a second line per profession).
+M.LINES = {
+    [129] = "firstaid",
+    [164] = "blacksmithing",
+    [165] = "leatherworking",
+    [171] = "alchemy",
+    [182] = "herbalism",
+    [185] = "cooking",
+    [186] = "mining",
+    [197] = "tailoring",
+    [202] = "engineering",
+    [333] = "enchanting",
+    [356] = "fishing",
+    [393] = "skinning",
+    [2937] = "alchemy",
+    [2938] = "blacksmithing",
+    [2939] = "cooking",
+    [2940] = "enchanting",
+    [2941] = "engineering",
+    [2942] = "firstaid",
+    [2943] = "fishing",
+    [2944] = "herbalism",
+    [2945] = "leatherworking",
+    [2946] = "mining",
+    [2947] = "skinning",
+    [2948] = "tailoring",
+}
+
 -- Item IDs used by each profession's recipes.
 M.USES = {
     alchemy = "730,765,785,1288,2447,2449,2450,2452,2453,3355,3356,3357,3358,3369,3371,3372,3575,3818,3819,3820,3821,3858,3860,4342,4402,4625,5635,5637,6358,6359,6370,6371,7067,7068,7069,7070,7076,7077,7078,7080,7082,7972,8153,8831,8836,8838,8839,8845,8846,8925,9262,10286,10620,11083,11176,12359,12363,12803,12804,12808,13422,13423,13463,13464,13465,13466,13467,13468,15410,16203,18256,19943,213371,215430,220688,221021,234006,234010,234011,234012,248819,248821,248822,248823,249274,249391,249399,249424,251291,273125",

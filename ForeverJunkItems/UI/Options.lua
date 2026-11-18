@@ -137,7 +137,7 @@ local function listColumn(parent, x, y, title, listName, tip)
         tooltip(row, "Click to remove", "The item follows the normal rules again.")
         rows[i] = row
     end
-    local more = text(parent, "GameFontDisableSmall", x + 4, y - 46 - UI.LIST_ROWS * 17)
+    local more = text(parent, "GameFontDisableSmall", x + 4, y - 46, 196)
     refreshers[#refreshers + 1] = function()
         local ids = UI.Sorted(ns.db[listName])
         for i, row in ipairs(rows) do
@@ -150,8 +150,11 @@ local function listColumn(parent, x, y, title, listName, tip)
                 row:Hide()
             end
         end
+        -- Right under the last entry shown.
+        more:ClearAllPoints()
+        more:SetPoint("TOPLEFT", x + 4, y - 46 - math.min(#ids, UI.LIST_ROWS) * 17)
         if #ids == 0 then
-            more:SetText("Empty")
+            more:SetText("Empty: drag an item from your bags onto the button")
         elseif #ids > UI.LIST_ROWS then
             more:SetText("and " .. (#ids - UI.LIST_ROWS) .. " more (/fji remove <item>)")
         else

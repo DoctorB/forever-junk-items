@@ -32,8 +32,14 @@ function handlers.SKILL_LINES_CHANGED()
     scanProfessions()
 end
 
+-- Learning or unlearning a profession changes the spell book.
+function handlers.SPELLS_CHANGED()
+    scanProfessions()
+end
+
 function handlers.LOOT_READY(autoLoot)
     ns.Looter.readySeen = true
+    if next(ns.Professions.known) == nil then scanProfessions() end -- an empty read after login
     ns.Control.CheckGameOption()
     ns.Looter.OnReady(autoLoot)
 end
