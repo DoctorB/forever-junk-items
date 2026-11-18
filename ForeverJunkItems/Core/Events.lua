@@ -5,9 +5,8 @@ local frame = CreateFrame("Frame")
 ns.EventFrame = frame
 
 local function scanProfessions()
-    if type(ForeverJunkItemsCharDB) ~= "table" then ForeverJunkItemsCharDB = {} end
-    if type(ForeverJunkItemsCharDB.professions) ~= "table" then ForeverJunkItemsCharDB.professions = {} end
-    ns.Professions.Scan(ForeverJunkItemsCharDB.professions)
+    if not ns.char then return end
+    ns.Professions.Scan(ns.char.professions)
     if ns.UI and ns.UI.Refresh then ns.UI.Refresh() end
 end
 

@@ -24,9 +24,14 @@ function ns.CopyDefaults(db)
     return db
 end
 
+-- Settings, lists and totals are shared by the account's characters; each
+-- character keeps its own professions and its own game Auto Loot value.
 function ns.LoadSettings()
     if type(ForeverJunkItemsDB) ~= "table" then ForeverJunkItemsDB = {} end
     ns.db = ns.CopyDefaults(ForeverJunkItemsDB)
+    if type(ForeverJunkItemsCharDB) ~= "table" then ForeverJunkItemsCharDB = {} end
+    if type(ForeverJunkItemsCharDB.professions) ~= "table" then ForeverJunkItemsCharDB.professions = {} end
+    ns.char = ForeverJunkItemsCharDB
     return ns.db
 end
 

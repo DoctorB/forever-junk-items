@@ -11,13 +11,13 @@ local function cvar()
 end
 
 -- On: the game's Auto Loot is switched off (the add-on loots instead) and
--- its old value is remembered. Off: the remembered value is put back.
+-- its old value is remembered for this character. Off: it is put back.
 function Control.Apply()
-    local db = ns.db
-    if not db or not SetCVar then return end
+    local db, char = ns.db, ns.char
+    if not db or not char or not SetCVar then return end
     if db.enabled then
         if cvar() == "1" then
-            db.gameAutoLoot = "1"
+            char.gameAutoLoot = "1"
             pcall(SetCVar, CVAR, "0")
         end
         if not db.introduced then
@@ -25,9 +25,9 @@ function Control.Apply()
             ns.Print("now loots for you and leaves junk on enemy corpses. Hold Shift while looting to take "
                 .. "everything. Type /fji for the options.")
         end
-    elseif db.gameAutoLoot then
-        pcall(SetCVar, CVAR, db.gameAutoLoot)
-        db.gameAutoLoot = nil
+    elseif char.gameAutoLoot then
+        pcall(SetCVar, CVAR, char.gameAutoLoot)
+        char.gameAutoLoot = nil
     end
 end
 
@@ -35,9 +35,9 @@ end
 -- player who removes the add-on gets their Auto Loot back. The next login
 -- switches it off again (Apply).
 function Control.OnLogout()
-    local db = ns.db
-    if db and db.enabled and db.gameAutoLoot and SetCVar then
-        pcall(SetCVar, CVAR, db.gameAutoLoot)
+    local db, char = ns.db, ns.char
+    if db and char and db.enabled and char.gameAutoLoot and SetCVar then
+        pcall(SetCVar, CVAR, char.gameAutoLoot)
     end
 end
 

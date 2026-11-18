@@ -2,7 +2,7 @@
 local H = dofile("tests/harness/wow.lua")
 local ns = H.Boot() -- client starts with Auto Loot on
 H.Equal(H.cvars.autoLootDefault, "0", "game Auto Loot switched off at login")
-H.Equal(ns.db.gameAutoLoot, "1", "old value remembered")
+H.Equal(ns.char.gameAutoLoot, "1", "old value remembered for this character")
 H.Check(H.chat[1] and H.chat[1]:find("Hold Shift"), "first login explains Shift")
 local lines = #H.chat
 H.Fire("PLAYER_LOGIN")
@@ -20,12 +20,32 @@ H.Fire("PLAYER_LOGOUT")
 H.Equal(H.cvars.autoLootDefault, "1", "logout restores the game's Auto Loot")
 H.Fire("PLAYER_LOGIN")
 H.Equal(H.cvars.autoLootDefault, "0", "login switches it off again")
-H.Equal(ns.db.gameAutoLoot, "1", "still remembered")
+H.Equal(ns.char.gameAutoLoot, "1", "still remembered")
 
 -- A player who looted by hand gets their setting back unchanged.
 ns = H.Boot(function() H.cvars.autoLootDefault = "0" end)
 SlashCmdList.FOREVERJUNKITEMS("off")
 H.Equal(H.cvars.autoLootDefault, "0", "manual looting stays manual after /fji off")
+
+-- Two characters on one account: settings shared, Auto Loot value and
+-- professions per character.
+ns = H.Boot(function()
+    H.cvars.autoLootDefault = "1"
+    ForeverJunkItemsDB = { greyMinValue = 1000, always = { [42] = true } }
+    ForeverJunkItemsCharDB = nil -- a character that loots by hand: see below
+end)
+H.Equal(ns.db.greyMinValue, 1000, "account settings shared")
+H.Check(ns.db.always[42], "account lists shared")
+local accountDB = ForeverJunkItemsDB
+ns = H.Boot(function()
+    H.cvars.autoLootDefault = "0" -- this character looted by hand
+    ForeverJunkItemsDB = accountDB
+end)
+H.Equal(ns.char.gameAutoLoot, nil, "second character remembers its own value")
+H.Fire("PLAYER_LOGOUT")
+H.Equal(H.cvars.autoLootDefault, "0", "second character keeps manual looting at logout")
+SlashCmdList.FOREVERJUNKITEMS("off")
+H.Equal(H.cvars.autoLootDefault, "0", "and after /fji off")
 
 -- Someone turns the game option back on: one warning per session.
 ns = H.Boot()
