@@ -10,9 +10,8 @@ riproducibile di `scripts/package.py`), pacchetto verificabile byte per byte
 
 ## Prerequisiti (una tantum)
 
-1. **Progetto CurseForge**: da creare a mano con i dati di
+1. **Progetto CurseForge** `1814064`, creato il 2026-11-18 con i dati di
    `docs/CURSEFORGE_LISTING.md` (World of Warcraft → Addons, licenza MIT).
-   Annotare qui l'ID del progetto quando esiste.
 2. Repository `DoctorB/forever-junk-items`, **Settings → Secrets and variables → Actions**:
    - secret `CF_API_TOKEN`: token API di CurseForge dell'autore
      (curseforge.com → account → API Tokens; lo stesso usato per gli altri progetti va bene);
