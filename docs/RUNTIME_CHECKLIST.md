@@ -10,7 +10,7 @@ usati su Interface 16001), non su prove nostre.
 
 | # | Prova | Atteso | Esito |
 |---|---|---|---|
-| 1 | Primo login con l'add-on | Riga in chat "now loots for you..."; Interfaccia → Controlli: Auto Loot disattivato | |
+| 1 | Primo login con l'add-on | Riga in chat "now loots for you..."; Interfaccia → Controlli: Auto Loot disattivato | Riga in chat OK (2026-11-18, screenshot); opzione Auto Loot da guardare |
 | 2 | Uccidere un mob con un grigio sotto i 5s e un bianco | Bianco e soldi in borsa, grigio resta nel cadavere (luccica ancora), nessuna finestra di loot, riga "left behind" in chat | |
 | 3 | Ri-aprire quel cadavere | Si vede solo il grigio; si chiude da solo | |
 | 4 | Shift + click sul cadavere | Raccoglie tutto, grigio compreso | |
@@ -23,7 +23,7 @@ usati su Interface 16001), non su prove nostre.
 | 11 | Oggetto BoP (verde/blu) | Si apre la finestra di loot con la domanda di conferma | |
 | 12 | Gruppo con oggetto in tiro | Finestra di loot normale | |
 | 13 | Borse piene, verde nel cadavere | Riga rossa "no room in your bags for ..." | |
-| 14 | `/fji` | Finestra opzioni: professioni rilevate, - e + funzionano, trascinare un oggetto su "Always loot" lo aggiunge, clic sulla riga lo toglie | |
+| 14 | `/fji` | Finestra opzioni: professioni rilevate, - e + funzionano, trascinare un oggetto su "Always loot" lo aggiunge, clic sulla riga lo toglie | 2026-11-18: finestra OK, professioni "None found" (corretto in c6fccdc: su Forever si leggono con GetProfessions); da ricontrollare |
 | 15 | Header "Professions" chiuso nella finestra abilità (K) | Le professioni restano quelle viste prima | |
 | 16 | Primo grigio mai visto dall'avvio del gioco | Deciso dopo un attimo (prezzo non in cache), nessun errore | |
 | 17 | Logout e login con l'add-on attivo | Dopo il login l'Auto Loot del gioco è di nuovo spento e il filtro funziona (al logout il valore originale viene rimesso per chi disinstalla) | |
