@@ -1,0 +1,21 @@
+## Interface: 16001
+## Title: Forever Junk Items
+## Notes: Loots for you and leaves worthless items on enemy corpses, so your bags last longer. Quest items, everything white or better and your profession materials are always taken.
+## Author: DoctorB
+## Version: 1.0.0
+## IconTexture: Interface\AddOns\ForeverJunkItems\Media\icon
+## SavedVariables: ForeverJunkItemsDB
+## SavedVariablesPerCharacter: ForeverJunkItemsCharDB
+## X-License: MIT
+
+Core\Init.lua
+Data\Materials.lua
+Core\Rules.lua
+Core\Professions.lua
+Core\Bags.lua
+Core\Corpse.lua
+Core\Looter.lua
+Core\Control.lua
+UI\Options.lua
+Core\Commands.lua
+Core\Events.lua
