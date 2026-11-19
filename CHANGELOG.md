@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0 - 2026-11-19
+
+- **Minimap button** with the add-on icon: left-click opens the options,
+  right-click turns the filter on or off. Drag it to move it around the
+  minimap; hide it in the options or with `/fji minimap`.
+
 ## 1.0.0 - 2026-11-18
 
 First release for WoW Forever.

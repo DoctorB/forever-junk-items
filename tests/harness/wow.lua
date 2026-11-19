@@ -117,6 +117,12 @@ function H.Reset()
     _G.UIParent = newObject("Frame", "UIParent")
     _G.WorldFrame = newObject("Frame", "WorldFrame")
     _G.GameTooltip = newObject("GameTooltip", "GameTooltip")
+    _G.Minimap = newObject("Frame", "Minimap")
+    Minimap.GetWidth = function() return 140 end
+    Minimap.GetCenter = function() return 1000, 600 end
+    Minimap.GetEffectiveScale = function() return 1 end
+    H.cursorPosition = { 1000, 600 }
+    _G.GetCursorPosition = function() return H.cursorPosition[1], H.cursorPosition[2] end
     -- Blizzard's loot window, registered for LOOT_OPENED as in the client.
     H.lootFrameOpened = 0
     _G.LootFrame = newObject("Frame", "LootFrame")

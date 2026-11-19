@@ -1,4 +1,4 @@
-# Prove in gioco (1.0.0)
+# Prove in gioco (1.0.0, 1.1.0)
 
 Le suite offline coprono le regole e il flusso con un client finto. Queste
 sono le cose che solo il client WoW Forever può confermare. Ogni riga:
@@ -28,6 +28,9 @@ usati su Interface 16001), non su prove nostre.
 | 16 | Primo grigio mai visto dall'avvio del gioco | Deciso dopo un attimo (prezzo non in cache), nessun errore | |
 | 17 | Logout e login con l'add-on attivo | Dopo il login l'Auto Loot del gioco è di nuovo spento e il filtro funziona (al logout il valore originale viene rimesso per chi disinstalla) | |
 | 18 | Mob ucciso mentre si guarda un altro cadavere scuoiabile | Il filtro usa il cadavere giusto | |
+| 19 | Pulsante minimappa (1.1.0) | Icona del sacchetto sul bordo in basso a sinistra; tooltip con stato del filtro; clic sinistro apre/chiude le opzioni, clic destro accende/spegne il filtro | |
+| 20 | Trascinare il pulsante minimappa, poi /reload | Resta nella nuova posizione | |
+| 21 | Opzioni: "Show minimap button" spento, poi `/fji minimap` | Il pulsante sparisce, il comando lo rimette e la casella si aggiorna | |
 
 ## Punti da osservare
 

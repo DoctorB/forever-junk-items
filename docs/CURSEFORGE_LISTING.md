@@ -74,7 +74,8 @@ everything from a corpse, junk included.
 
 ## Your rules
 
-Type **/fji** to open the options:
+Type **/fji** or click the **minimap button** to open the options
+(right-click it to turn the filter on or off):
 
 - the value a grey item needs to be picked up,
 - how many free slots make it choosier,
@@ -99,6 +100,7 @@ Type **/fji** to open the options:
 - `/fji on` / `/fji off` - turn the filter on or off
 - `/fji status` - your settings and professions
 - `/fji always <item>` / `/fji never <item>` / `/fji remove <item>` - your lists
+- `/fji minimap` - show or hide the minimap button
 
 ## Feedback
 
@@ -111,7 +113,7 @@ Bug reports and ideas are welcome on
 | Campo | Valore |
 |---|---|
 | File | ZIP verificato costruito dal workflow (`scripts/release.py package`) |
-| Display Name | `Forever Junk Items 1.0.0` |
+| Display Name | `Forever Junk Items <versione>` (es. `1.1.0`) |
 | Release Type | dal suffisso della versione: senza suffisso **Release**, `-beta.N` Beta, `-alpha.N` Alpha. L'app CurseForge sincronizza un progetto solo dopo il primo file Release |
 | Supported Version | la versione **Forever** del client 1.60.1 (Interface `16001`) |
 | Related Projects | nessuno |

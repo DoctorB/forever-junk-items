@@ -48,7 +48,8 @@ included.
 
 ## Options
 
-Type **/fji** to open the options:
+Type **/fji** or click the **minimap button** to open the options
+(right-click the button to turn the filter on or off):
 
 - turn the filter on or off,
 - the value a grey item needs to be picked up,
@@ -56,7 +57,8 @@ Type **/fji** to open the options:
 - empty corpses you can skin, mine or gather from,
 - a short chat line listing what was left behind,
 - your **Always loot** and **Never loot** lists: drag an item from your bags
-  onto a list, click it on the list to remove it.
+  onto a list, click it on the list to remove it,
+- show or hide the minimap button.
 
 The window also shows the professions it found for your character and how
 many items it has left behind this session.

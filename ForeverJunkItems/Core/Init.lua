@@ -3,7 +3,7 @@ local ADDON, ns = ...
 
 ns.NAME = "ForeverJunkItems"
 ns.TITLE = "Forever Junk Items"
-ns.VERSION = "1.0.0"
+ns.VERSION = "1.1.0"
 
 -- Account-wide settings. Money values are in copper.
 ns.DEFAULTS = {
@@ -14,6 +14,8 @@ ns.DEFAULTS = {
     report = true,        -- list what was left behind in chat
 }
 
+ns.DEFAULT_MINIMAP_ANGLE = 225
+
 function ns.CopyDefaults(db)
     for key, value in pairs(ns.DEFAULTS) do
         if db[key] == nil then db[key] = value end
@@ -21,6 +23,11 @@ function ns.CopyDefaults(db)
     if type(db.always) ~= "table" then db.always = {} end
     if type(db.never) ~= "table" then db.never = {} end
     if type(db.stats) ~= "table" then db.stats = { left = 0, value = 0 } end
+    -- Minimap button: shown by default, lower left of the minimap edge.
+    local minimap = type(db.minimap) == "table" and db.minimap or {}
+    local angle = tonumber(minimap.angle)
+    db.minimap = { shown = minimap.shown ~= false,
+        angle = (angle and angle == angle) and math.floor(angle) % 360 or ns.DEFAULT_MINIMAP_ANGLE }
     return db
 end
 

@@ -22,6 +22,7 @@ function handlers.PLAYER_LOGIN()
     ns.Control.Apply()
     scanProfessions()
     if ns.UI and ns.UI.Create then ns.UI.Create() end
+    if ns.MinimapButton then ns.MinimapButton.Apply() end
 end
 
 function handlers.PLAYER_LOGOUT()

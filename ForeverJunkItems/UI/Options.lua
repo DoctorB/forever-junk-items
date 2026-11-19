@@ -11,7 +11,7 @@ UI.GREY_STEPS = { 0, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000 }
 UI.RESERVE_MIN, UI.RESERVE_MAX = 0, 16
 UI.LIST_ROWS = 6
 
-local WIDTH, HEIGHT = 470, 600
+local WIDTH, HEIGHT = 470, 628
 local frame
 local refreshers = {}
 
@@ -215,6 +215,11 @@ local function build()
     check(frame, y, "List what is left behind in chat",
         "One chat line per corpse with the items left behind and what they are worth.",
         function() return db().report end, function(v) db().report = v end)
+    y = y - 28
+    check(frame, y, "Show minimap button",
+        "Left-click opens these options, right-click turns the filter on or off. Drag it along the "
+        .. "minimap edge. Without it, type /fji.",
+        function() return db().minimap.shown end, function(v) ns.MinimapButton.SetShown(v) end)
     y = y - 38
 
     y = section(frame, "Your professions", y)
@@ -254,6 +259,10 @@ function UI.Open()
     if not frame then build() end
     frame:Show()
     UI.Refresh()
+end
+
+function UI.Close()
+    if frame then frame:Hide() end
 end
 
 function UI.IsShown()

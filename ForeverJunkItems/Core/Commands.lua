@@ -11,6 +11,7 @@ local HELP = {
     "/fji always <item> - always loot an item (shift-click it into the command)",
     "/fji never <item> - never loot an item",
     "/fji remove <item> - take an item off both lists",
+    "/fji minimap - show or hide the minimap button",
 }
 
 local function itemText(id)
@@ -69,6 +70,11 @@ function Commands.Run(message)
         Commands.SetList(command, rest)
     elseif command == "remove" then
         Commands.Remove(rest)
+    elseif command == "minimap" then
+        local shown = not ns.db.minimap.shown
+        ns.MinimapButton.SetShown(shown)
+        ns.Print(shown and "minimap button shown." or "minimap button hidden: /fji minimap shows it again.")
+        if ns.UI and ns.UI.Refresh then ns.UI.Refresh() end
     else
         for _, line in ipairs(HELP) do ns.Print(line) end
     end
