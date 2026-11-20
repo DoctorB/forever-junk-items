@@ -102,8 +102,9 @@ end
 
 -- Decides every slot. Returns take (list of items), leave (list), needWindow,
 -- unknown (items whose price or binding the client has not cached yet).
+-- notable: a rare (blue) or better item is wanted, or would be with room.
 function Looter.Plan(slotCount, ctx)
-    local take, leave, needWindow, unknown = {}, {}, false, 0
+    local take, leave, needWindow, unknown, notable = {}, {}, false, 0, false
     local mlThreshold = masterLootThreshold()
     -- Money first: it never needs bag space.
     local items = {}
@@ -121,6 +122,9 @@ function Looter.Plan(slotCount, ctx)
             wanted, reason = ns.Rules.Decide(item, ctx)
         end
         item.reason = reason
+        if not item.money and wanted and type(item.quality) == "number" and item.quality >= Looter.RARE then
+            notable = true
+        end
         if not ctx.takeAll and not item.money and not item.cached and type(item.quality) == "number"
             and (item.quality == ns.Rules.POOR or item.quality >= ns.Rules.UNCOMMON) then
             unknown = unknown + 1
@@ -138,7 +142,7 @@ function Looter.Plan(slotCount, ctx)
             take[#take + 1] = item
         end
     end
-    return take, leave, needWindow, unknown
+    return take, leave, needWindow, unknown, notable
 end
 
 local function context(settings, gatherKey)
@@ -229,6 +233,18 @@ local function giveUp(id)
     close()
 end
 
+-- A rare (blue) or better item asks for a look: the game's "epic loot"
+-- sound plays, once per loot (SoundKit 31578 is in the Forever client,
+-- build 1.60.1.70959, with its sound file).
+Looter.RARE = 3 -- item quality: rare (blue)
+Looter.SOUND = 31578
+
+function Looter.PlayRareSound()
+    if type(PlaySound) ~= "function" then return end
+    local id = (SOUNDKIT and SOUNDKIT.UI_EPICLOOT_TOAST) or Looter.SOUND
+    pcall(PlaySound, id)
+end
+
 local MAX_WAITS, WAIT = 3, 0.15 -- item data the client has not cached yet
 
 local function run(id)
@@ -236,12 +252,16 @@ local function run(id)
     local count = call(GetNumLootItems) or 0
     local ctx = context(ns.db, L.gatherKey)
     if L.notCorpse then ctx.takeAll = true end
-    local take, leave, needWindow, unknown = Looter.Plan(count, ctx)
+    local take, leave, needWindow, unknown, notable = Looter.Plan(count, ctx)
     if unknown > 0 and L.waits < MAX_WAITS then
         -- Price or binding not cached yet: ask for it and judge again shortly.
         L.waits = L.waits + 1
         after(WAIT, function() run(id) end)
         return
+    end
+    if notable and ns.db.rareSound and not L.sounded then
+        L.sounded = true
+        Looter.PlayRareSound()
     end
     for _, item in ipairs(leave) do L.left[#L.left + 1] = item end
     for _, item in ipairs(take) do request(item.slot) end
@@ -261,7 +281,7 @@ function Looter.OnReady(autoLoot)
     if L.open then return end
     L.open, L.ours, L.windowNeeded, L.opened, L.closeOnOpen = true, false, false, false, false
     L.id = L.id + 1
-    L.pending, L.waits = 0, 0
+    L.pending, L.waits, L.sounded = 0, 0, false
     wipe(L.requested)
     wipe(L.left)
     wipe(L.missed)

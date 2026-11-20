@@ -72,7 +72,7 @@ H.Check(H.LastChat():find("item link"), "bad item refused with a hint")
 SlashCmdList.FOREVERJUNKITEMS("status")
 H.Check(H.LastChat():find("left behind this session"), "/fji status")
 SlashCmdList.FOREVERJUNKITEMS("help")
-H.Check(H.LastChat():find("/fji minimap"), "help lists the commands")
+H.Check(H.LastChat():find("/fji sound"), "help lists the commands")
 
 -- Settings survive a reload and gain new defaults.
 ForeverJunkItemsDB = { greyMinValue = 2000 }

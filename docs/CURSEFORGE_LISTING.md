@@ -82,6 +82,7 @@ Type **/fji** or click the **minimap button** to open the options
 - how many free slots make it choosier,
 - empty corpses you can skin, mine or gather from,
 - a short chat line listing what was left behind,
+- a chime when a **rare (blue) or better** item drops, so you do not miss it,
 - **Always loot** and **Never loot** lists: drag an item from your bags onto
   a list.
 
@@ -102,6 +103,7 @@ Type **/fji** or click the **minimap button** to open the options
 - `/fji status` - your settings and professions
 - `/fji always <item>` / `/fji never <item>` / `/fji remove <item>` - your lists
 - `/fji minimap` - show or hide the minimap button
+- `/fji sound` - hear the rare item sound (`/fji sound on` / `off`)
 
 ## Feedback
 

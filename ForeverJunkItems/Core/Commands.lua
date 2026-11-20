@@ -12,6 +12,7 @@ local HELP = {
     "/fji never <item> - never loot an item",
     "/fji remove <item> - take an item off both lists",
     "/fji minimap - show or hide the minimap button",
+    "/fji sound [on | off] - hear the rare item sound, or turn it on or off",
 }
 
 local function itemText(id)
@@ -51,6 +52,7 @@ function Commands.Status()
     ns.Print("grey items worth less than " .. ns.Money(db.greyMinValue) .. " stay on the corpse")
     ns.Print("with " .. db.reserveSlots .. " free bag slots or fewer, only quest items, green or better, "
         .. "bags and your profession materials are looted")
+    ns.Print("sound for rare or better items: " .. (db.rareSound and "on" or "off"))
     ns.Print("professions: " .. (ns.Professions.Describe() or "none found"))
     ns.Print("left behind this session: " .. ns.session.left .. " items (" .. ns.Money(ns.session.value) .. ")")
 end
@@ -70,6 +72,17 @@ function Commands.Run(message)
         Commands.SetList(command, rest)
     elseif command == "remove" then
         Commands.Remove(rest)
+    elseif command == "sound" then
+        local choice = rest:lower()
+        if choice == "on" or choice == "off" then
+            ns.db.rareSound = choice == "on"
+            ns.Print("sound for rare or better items " .. choice .. ".")
+            if ns.UI and ns.UI.Refresh then ns.UI.Refresh() end
+        else
+            ns.Looter.PlayRareSound()
+            ns.Print("this is the sound for rare or better items ("
+                .. (ns.db.rareSound and "on" or "off") .. "; /fji sound on | off).")
+        end
     elseif command == "minimap" then
         local shown = not ns.db.minimap.shown
         ns.MinimapButton.SetShown(shown)

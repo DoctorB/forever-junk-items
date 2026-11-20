@@ -32,6 +32,7 @@ usati su Interface 16001), non su prove nostre.
 | 20 | Trascinare il pulsante minimappa, poi /reload | Resta nella nuova posizione | |
 | 21 | Opzioni: "Show minimap button" spento, poi `/fji minimap` | Il pulsante sparisce, il comando lo rimette e la casella si aggiorna | |
 | 22 | Borse con 4 slot liberi o meno, un mob che lascia una borsa bianca (es. 10 slot) | La borsa viene raccolta, gli altri bianchi restano sul cadavere | |
+| 23 | `/fji sound`, poi un mob che lascia un oggetto blu o viola | Si sente il suono "epic loot" del gioco (una volta per cadavere); con la casella "Play a sound for rare or better items" spenta, silenzio. Se `/fji sound` non suona nulla, annotarlo: il suono 31578 potrebbe mancare nel client | |
 
 ## Punti da osservare
 

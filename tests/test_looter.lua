@@ -194,4 +194,41 @@ H.Check(H.Taken(1) and not H.Taken(2), "filter works from LOOT_OPENED")
 H.Equal(H.closed, 1, "and closes the loot")
 H.Check(LootFrame:IsEventRegistered("LOOT_OPENED"), "window events restored")
 
+-- 15. A rare (blue) or better item: one chime per loot, the game's "epic loot" sound.
+H.sounds = {}
+local blue = H.Item(200, { quality = 3, sellPrice = 5000 })
+local purple = H.Item(201, { quality = 4, sellPrice = 9000 })
+H.OpenLoot({ [1] = { link = green, quality = 2 }, [2] = { link = grey, quality = 0 } })
+H.Equal(#H.sounds, 0, "no sound for green and grey")
+H.OpenLoot({ [1] = { link = blue, quality = 3 }, [2] = { link = purple, quality = 4 } })
+H.Equal(#H.sounds, 1, "one sound for two rare items")
+H.Equal(H.sounds[1], 31578, "the epic loot sound")
+H.Check(H.Taken(1) and H.Taken(2), "and both are taken")
+H.Advance(1)
+H.OpenLoot({ [1] = { link = blue, quality = 3 } })
+H.Equal(#H.sounds, 2, "again on the next loot")
+ns.db.rareSound = false
+H.OpenLoot({ [1] = { link = blue, quality = 3 } })
+H.Equal(#H.sounds, 2, "option off: silent")
+ns.db.rareSound = true
+ns.db.never[200] = true
+H.OpenLoot({ [1] = { link = blue, quality = 3 } })
+H.Equal(#H.sounds, 2, "an item on the Never list stays silent")
+ns.db.never[200] = nil
+H.bags = { [0] = { free = 0, family = 0 } }
+H.OpenLoot({ [1] = { link = blue, quality = 3 } })
+H.Equal(#H.sounds, 3, "bags full: the sound still points at it")
+H.bags = { [0] = { free = 10, family = 0 } }
+local fresh = H.Item(202, { quality = 3, sellPrice = 100, uncached = true })
+H.OpenLoot({ [1] = { link = fresh, quality = 3 } })
+H.Advance(1)
+H.Equal(#H.sounds, 4, "an item not cached yet: one sound after the waits")
+local before = #H.sounds
+ns.Commands.Run("sound")
+H.Equal(#H.sounds, before + 1, "/fji sound plays it")
+ns.Commands.Run("sound off")
+H.Equal(ns.db.rareSound, false, "/fji sound off")
+ns.Commands.Run("sound on")
+H.Equal(ns.db.rareSound, true, "/fji sound on")
+
 H.Done("test_looter")

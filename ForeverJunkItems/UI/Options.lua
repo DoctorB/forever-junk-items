@@ -11,7 +11,7 @@ UI.GREY_STEPS = { 0, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000 }
 UI.RESERVE_MIN, UI.RESERVE_MAX = 0, 16
 UI.LIST_ROWS = 6
 
-local WIDTH, HEIGHT = 470, 628
+local WIDTH, HEIGHT = 470, 656
 local frame
 local refreshers = {}
 
@@ -215,6 +215,10 @@ local function build()
     check(frame, y, "List what is left behind in chat",
         "One chat line per corpse with the items left behind and what they are worth.",
         function() return db().report end, function(v) db().report = v end)
+    y = y - 28
+    check(frame, y, "Play a sound for rare or better items",
+        "A short chime when a blue or purple item drops, so you do not miss it. Type /fji sound to hear it.",
+        function() return db().rareSound end, function(v) db().rareSound = v end)
     y = y - 28
     check(frame, y, "Show minimap button",
         "Left-click opens these options, right-click turns the filter on or off. Drag it along the "

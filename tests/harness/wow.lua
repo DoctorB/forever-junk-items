@@ -92,6 +92,8 @@ function H.Reset()
     H.lootMethod = { "freeforall" }
     H.fishing = false
     H.createdNames = {}
+    H.sounds = {}
+    _G.PlaySound = function(id) H.sounds[#H.sounds + 1] = id end
 
     _G.ForeverJunkItemsDB = nil
     _G.ForeverJunkItemsCharDB = nil

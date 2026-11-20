@@ -12,6 +12,7 @@ ns.DEFAULTS = {
     reserveSlots = 4,     -- with this many free bag slots or fewer, only the essentials are looted
     gatherCorpses = true, -- empty corpses you can skin, mine or gather from
     report = true,        -- list what was left behind in chat
+    rareSound = true,     -- a sound when a rare (blue) or better item drops
 }
 
 ns.DEFAULT_MINIMAP_ANGLE = 225

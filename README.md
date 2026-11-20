@@ -57,6 +57,7 @@ Type **/fji** or click the **minimap button** to open the options
 - how many free bag slots make the add-on choosier,
 - empty corpses you can skin, mine or gather from,
 - a short chat line listing what was left behind,
+- a chime when a **rare (blue) or better** item drops, so you do not miss it,
 - your **Always loot** and **Never loot** lists: drag an item from your bags
   onto a list, click it on the list to remove it,
 - show or hide the minimap button.
@@ -86,6 +87,8 @@ many items it has left behind this session.
 | `/fji always <item>` | always loot an item (shift-click the item into the chat line) |
 | `/fji never <item>` | never loot an item |
 | `/fji remove <item>` | take an item off both lists |
+| `/fji minimap` | show or hide the minimap button |
+| `/fji sound` | hear the rare item sound; `/fji sound on` / `off` turns it on or off |
 
 ## Installation
 
