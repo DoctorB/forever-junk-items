@@ -3,7 +3,7 @@
 ## Notes: Loots for you and leaves worthless items on enemy corpses, so your bags last longer. Quest items, everything white or better and your profession materials are always taken.
 ## Notes-itIT: Raccoglie il bottino al posto tuo e lascia nei cadaveri dei nemici gli oggetti senza valore, così le borse durano di più. Oggetti delle missioni, tutto dal bianco in su e i materiali delle tue professioni vengono sempre raccolti.
 ## Author: DoctorB
-## Version: 1.1.1
+## Version: 1.2.0
 ## IconTexture: Interface\AddOns\ForeverJunkItems\Media\icon
 ## SavedVariables: ForeverJunkItemsDB
 ## SavedVariablesPerCharacter: ForeverJunkItemsCharDB

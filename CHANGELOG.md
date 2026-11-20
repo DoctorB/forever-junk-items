@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0 - 2026-11-20
+
+- **A sound for rare finds.** When a blue or purple item drops, you hear the
+  game's "epic loot" chime, so you never miss it, even if your bags are full.
+  Type `/fji sound` to hear it, and turn it off in the options or with
+  `/fji sound off`.
+
 ## 1.1.1 - 2026-11-20
 
 - **Bags are always picked up**, also when your bags are almost full. A bag
