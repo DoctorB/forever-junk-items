@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1 - 2026-11-20
+
+- **Bags are always picked up**, also when your bags are almost full. A bag
+  gives you more room, so it no longer stays on the corpse.
+
 ## 1.1.0 - 2026-11-19
 
 - **Minimap button** with the add-on icon: left-click opens the options,

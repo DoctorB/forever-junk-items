@@ -3,7 +3,7 @@ local ADDON, ns = ...
 
 ns.NAME = "ForeverJunkItems"
 ns.TITLE = "Forever Junk Items"
-ns.VERSION = "1.1.0"
+ns.VERSION = "1.1.1"
 
 -- Account-wide settings. Money values are in copper.
 ns.DEFAULTS = {
