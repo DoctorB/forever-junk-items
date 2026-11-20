@@ -199,8 +199,8 @@ local function build()
         function(d) db().greyMinValue = UI.StepGrey(db().greyMinValue, d); UI.Refresh() end)
     y = y - 28
     stepper(frame, y, "Free bag slots to keep",
-        "When only this many free slots are left, just quest items, green or better items and your "
-        .. "profession materials are looted. Items that join a stack you already carry are always looted.",
+        "When only this many free slots are left, just quest items, green or better items, bags and "
+        .. "your profession materials are looted. Items that join a stack you already carry are always looted.",
         function() return tostring(db().reserveSlots) end,
         function(d)
             db().reserveSlots = math.max(UI.RESERVE_MIN, math.min(UI.RESERVE_MAX, db().reserveSlots + d))

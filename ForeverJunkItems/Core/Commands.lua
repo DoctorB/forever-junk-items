@@ -49,8 +49,8 @@ function Commands.Status()
     local db = ns.db
     ns.Print(db.enabled and "on" or "off")
     ns.Print("grey items worth less than " .. ns.Money(db.greyMinValue) .. " stay on the corpse")
-    ns.Print("with " .. db.reserveSlots .. " free bag slots or fewer, only quest items, green or better "
-        .. "and your profession materials are looted")
+    ns.Print("with " .. db.reserveSlots .. " free bag slots or fewer, only quest items, green or better, "
+        .. "bags and your profession materials are looted")
     ns.Print("professions: " .. (ns.Professions.Describe() or "none found"))
     ns.Print("left behind this session: " .. ns.session.left .. " items (" .. ns.Money(ns.session.value) .. ")")
 end

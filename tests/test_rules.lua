@@ -51,6 +51,11 @@ H.Equal(select(2, decide({ itemID = 7, quality = 0, sellPrice = 1 }, { own = { [
 -- Few free slots.
 H.Equal(select(2, decide({ itemID = 8, quality = 1 }, { tight = true })), "space", "white non-material stays with few slots")
 H.Equal(select(2, decide({ itemID = 8, quality = 0, sellPrice = 9999 }, { tight = true })), "space", "valuable grey stays with few slots")
+H.Equal(select(2, decide({ itemID = 4496, quality = 1, classID = 1 }, { tight = true })), "bag", "a white bag is taken with few slots")
+H.Equal(select(2, decide({ itemID = 4496, quality = 0, classID = 1, sellPrice = 1 }, { tight = true })), "bag", "even a grey bag")
+settings.never[4496] = true
+H.Equal(select(2, decide({ itemID = 4496, quality = 1, classID = 1 }, { tight = true })), "never", "never list still wins over a bag")
+settings.never[4496] = nil
 H.Equal(select(2, decide({ itemID = 8, quality = 1, quantity = 2 }, { tight = true, stacksOnto = function(id, q)
     return id == 8 and q == 2 end })), "stack", "an item that joins a carried stack is taken")
 

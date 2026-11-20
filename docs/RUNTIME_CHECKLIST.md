@@ -31,6 +31,7 @@ usati su Interface 16001), non su prove nostre.
 | 19 | Pulsante minimappa (1.1.0) | Icona del sacchetto sul bordo in basso a sinistra; tooltip con stato del filtro; clic sinistro apre/chiude le opzioni, clic destro accende/spegne il filtro | |
 | 20 | Trascinare il pulsante minimappa, poi /reload | Resta nella nuova posizione | |
 | 21 | Opzioni: "Show minimap button" spento, poi `/fji minimap` | Il pulsante sparisce, il comando lo rimette e la casella si aggiorna | |
+| 22 | Borse con 4 slot liberi o meno, un mob che lascia una borsa bianca (es. 10 slot) | La borsa viene raccolta, gli altri bianchi restano sul cadavere | |
 
 ## Punti da osservare
 

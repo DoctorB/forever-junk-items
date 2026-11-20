@@ -58,6 +58,7 @@ With only a few free slots left, it gets choosier and keeps picking up just:
 - quest items and everything green or better,
 - the **materials for your own professions** (Linen Cloth for a tailor,
   Copper Ore for a miner...),
+- **bags**, since they give you more room,
 - anything that fits on a stack you already carry.
 
 ## Ready to skin

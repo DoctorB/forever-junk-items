@@ -26,6 +26,7 @@ choosier. It still picks up:
 - quest items and everything green or better,
 - the **materials for your own professions**, for example Linen Cloth if you
   are a tailor or Copper Ore if you are a miner,
+- **bags**, since they give you more room,
 - anything that fits on a stack you already carry.
 
 Everything else stays on the corpse until you make room.

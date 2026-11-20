@@ -13,6 +13,7 @@ local Rules = {}
 ns.Rules = Rules
 
 local QUEST_CLASS = 12
+local CONTAINER_CLASS = 1 -- bags: worth a slot even when space is short, they make more
 Rules.POOR, Rules.COMMON, Rules.UNCOMMON = 0, 1, 2
 
 function Rules.Decide(item, ctx)
@@ -26,6 +27,7 @@ function Rules.Decide(item, ctx)
     if type(quality) ~= "number" then return true, "unknown" end
     if quality >= Rules.UNCOMMON then return true, "quality" end
     if id and ctx.own and ctx.own[id] then return true, "profession" end
+    if item.classID == CONTAINER_CLASS then return true, "bag" end
     if ctx.tight then
         -- Few free slots left: only what costs no new slot.
         if id and ctx.stacksOnto and ctx.stacksOnto(id, item.quantity or 1) then return true, "stack" end
