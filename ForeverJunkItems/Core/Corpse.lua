@@ -16,7 +16,21 @@ local function gatherLines()
     }
 end
 
+-- On Forever some unit and tooltip values are secret (in game 2026-11-21:
+-- the corpse GUID and its tooltip lines while looting). Lua may hold them
+-- but not compare them or use them as table keys: they count as unknown.
+local function plain(value)
+    if value == nil then return nil end
+    if type(issecretvalue) == "function" then
+        local ok, secret = pcall(issecretvalue, value)
+        if not ok or secret then return nil end
+    end
+    return value
+end
+Corpse.plain = plain
+
 local function guidKind(guid)
+    guid = plain(guid)
     return type(guid) == "string" and guid:match("^(%a+)%-") or nil
 end
 
@@ -27,7 +41,8 @@ function Corpse.Sources(slotCount)
     local sources, any = {}, false
     for slot = 1, slotCount do
         local ok, guid = pcall(GetLootSourceInfo, slot)
-        if ok and type(guid) == "string" then
+        guid = ok and plain(guid) or nil
+        if type(guid) == "string" then
             sources[guid] = true
             any = true
         end
@@ -57,7 +72,8 @@ local function tooltipLines(unit)
         if ok and type(data) == "table" and type(data.lines) == "table" then
             local lines = {}
             for _, line in ipairs(data.lines) do
-                if type(line) == "table" and type(line.leftText) == "string" then lines[#lines + 1] = line.leftText end
+                local text = type(line) == "table" and plain(line.leftText) or nil
+                if type(text) == "string" then lines[#lines + 1] = text end
             end
             return lines
         end
@@ -72,7 +88,7 @@ local function tooltipLines(unit)
     local lines = {}
     for i = 1, scanner:NumLines() do
         local region = _G["ForeverJunkItemsScanTooltipTextLeft" .. i]
-        local text = region and region:GetText()
+        local text = region and plain(region:GetText())
         if type(text) == "string" then lines[#lines + 1] = text end
     end
     scanner:Hide()
@@ -84,7 +100,8 @@ end
 -- of the loot sources (any dead one when the sources are unknown).
 function Corpse.GatherProfession(sources)
     for _, unit in ipairs({ "mouseover", "target" }) do
-        if UnitExists(unit) and UnitIsDead(unit) and (not sources or sources[UnitGUID(unit) or ""]) then
+        local guid = plain(UnitGUID(unit))
+        if plain(UnitExists(unit)) and plain(UnitIsDead(unit)) and (not sources or (guid and sources[guid])) then
             for _, text in ipairs(tooltipLines(unit)) do
                 for _, entry in ipairs(gatherLines()) do
                     if entry.text and text == entry.text then return entry.key end

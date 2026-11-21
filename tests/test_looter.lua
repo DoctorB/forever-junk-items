@@ -180,6 +180,21 @@ H.Fire("SKILL_LINES_CHANGED")
 H.units.mouseover.guid = "Creature-9-9-9-9-9-9"
 H.OpenLoot({ [1] = { link = grey, quality = 0 } })
 H.Check(not H.Taken(1), "another corpse's tooltip is ignored")
+-- Secret GUID or tooltip text (in game 2026-11-21: Lua errors while
+-- looting): unknown, never compared or used as a key; the junk stays.
+local SECRET = newproxy(true)
+getmetatable(SECRET).__index = function() error("secret value indexed") end
+_G.issecretvalue = function(value) return value == SECRET end
+H.units.mouseover = { guid = SECRET, dead = true, lines = { "Wolf", "Skinnable" } }
+H.OpenLoot({ [1] = { link = grey, quality = 0 } })
+H.Check(not H.Taken(1), "secret corpse GUID: no gathering assumed, no error")
+H.units.mouseover = { guid = "Creature-0-1-2-3-4-5", dead = true, lines = { "Wolf", SECRET } }
+H.OpenLoot({ [1] = { link = grey, quality = 0 } })
+H.Check(not H.Taken(1), "secret tooltip line: skipped, no error")
+H.units.mouseover.lines = { SECRET, "Skinnable" }
+H.OpenLoot({ [1] = { link = grey, quality = 0 } })
+H.Check(H.Taken(1), "a plain line after a secret one still counts")
+_G.issecretvalue = nil
 H.units.mouseover = nil
 
 -- 14. Without LOOT_READY the add-on starts on LOOT_OPENED.
