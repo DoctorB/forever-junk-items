@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1 - 2026-11-21
+
+- **No more error messages while looting.** In some places the game hides
+  whether a corpse can still be skinned or gathered, and the add-on showed
+  Lua errors when you looted it. Looting now just carries on as usual.
+
 ## 1.2.0 - 2026-11-20
 
 - **A sound for rare finds.** When a blue or purple item drops, you hear the
